@@ -22,7 +22,7 @@ export class EventsController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<Event> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Event | null> {
     return this.eventsService.findOne(id);
   }
 
@@ -35,7 +35,7 @@ export class EventsController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateEventDto: CreateEventDto,
-  ): Promise<Event> {
+  ): Promise<Event | null> {
     return this.eventsService.update(id, updateEventDto);
   }
 

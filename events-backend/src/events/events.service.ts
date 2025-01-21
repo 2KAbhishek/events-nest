@@ -15,7 +15,7 @@ export class EventsService {
     return this.eventsRepository.find();
   }
 
-  findOne(id: number): Promise<Event> {
+  findOne(id: number): Promise<Event | null> {
     return this.eventsRepository.findOne({ where: { id } });
   }
 
@@ -24,7 +24,10 @@ export class EventsService {
     return this.eventsRepository.save(event);
   }
 
-  async update(id: number, updateEventDto: CreateEventDto): Promise<Event> {
+  async update(
+    id: number,
+    updateEventDto: CreateEventDto,
+  ): Promise<Event | null> {
     await this.eventsRepository.update(id, updateEventDto);
     return this.findOne(id);
   }
