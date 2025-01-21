@@ -49,17 +49,17 @@ export const EventList: React.FC = () => {
                     events.map((event) => (
                         <div
                             key={event.id}
-                            className='border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-white'
+                            className='border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-gray-600'
                         >
                             <div className='flex justify-between items-start'>
                                 <div className='space-y-2'>
-                                    <p className='text-sm text-gray-500'>
+                                    <p className='text-sm text-gray-200'>
                                         {format(new Date(event.date), 'PPP')}
                                     </p>
-                                    <h3 className='text-lg font-semibold text-gray-700'>
+                                    <h3 className='text-lg font-semibold text-white'>
                                         {event.title}
                                     </h3>
-                                    <p className='text-gray-600'>
+                                    <p className='text-gray-100'>
                                         {event.description}
                                     </p>
                                 </div>
