@@ -5,15 +5,17 @@ import {EventForm} from './components/EventForm';
 function App() {
     return (
         <Router>
-            <div className='container mx-auto px-4 py-8'>
-                <Routes>
-                    <Route path='/' element={<EventList />} />
-                    <Route path='/events/new' element={<EventForm />} />
-                    <Route
-                        path='/events/:id/edit'
-                        element={<EventForm isEditing />}
-                    />
-                </Routes>
+            <div className='container bg-gray-950'>
+                <div className='container p-8'>
+                    <Routes>
+                        <Route path='/' element={<EventList />} />
+                        <Route path='/events/new' element={<EventForm />} />
+                        <Route
+                            path='/events/:id/edit'
+                            element={<EventForm isEditing />}
+                        />
+                    </Routes>
+                </div>
             </div>
         </Router>
     );
