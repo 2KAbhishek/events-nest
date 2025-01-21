@@ -35,7 +35,7 @@ export const EventList: React.FC = () => {
                 <h2 className='text-2xl font-bold'>Events</h2>
                 <Link
                     to='/events/new'
-                    className='bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors'
+                    className='bg-green-600 text-white px-4 py-2 rounded-md hover:text-gray-100 hover:bg-green-700 transition-colors'
                 >
                     New Event
                 </Link>
@@ -53,29 +53,26 @@ export const EventList: React.FC = () => {
                         >
                             <div className='flex justify-between items-start'>
                                 <div className='space-y-2'>
-                                    <h3 className='text-lg font-semibold'>
+                                    <p className='text-sm text-gray-500'>
+                                        {format(new Date(event.date), 'PPP')}
+                                    </p>
+                                    <h3 className='text-lg font-semibold text-gray-700'>
                                         {event.title}
                                     </h3>
                                     <p className='text-gray-600'>
                                         {event.description}
                                     </p>
-                                    <p className='text-sm text-gray-500'>
-                                        {format(new Date(event.date), 'PPP')}
-                                    </p>
                                 </div>
                                 <div className='space-x-4'>
-                                    <Link
-                                        to={`/events/${event.id}/edit`}
-                                        className='text-indigo-600 hover:text-indigo-800'
-                                    >
-                                        <button className='bg-gray-300'>
+                                    <Link to={`/events/${event.id}/edit`}>
+                                        <button className='bg-indigo-600 text-gray-100 hover:bg-indigo-700 transition-colors'>
                                             Edit
                                         </button>
                                     </Link>
 
                                     <button
                                         onClick={() => handleDelete(event.id)}
-                                        className='bg-gray-300 text-red-600 hover:text-red-800'
+                                        className='bg-red-600 text-gray-100 hover:bg-red-700 transition-colors'
                                     >
                                         Delete
                                     </button>
