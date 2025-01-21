@@ -55,7 +55,7 @@ export const EventForm: React.FC<EventFormProps> = ({isEditing}) => {
             </h2>
             <form onSubmit={handleSubmit} className='space-y-6'>
                 <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className='block text-sm font-medium text-gray-100'>
                         Title
                     </label>
                     <input
@@ -69,7 +69,7 @@ export const EventForm: React.FC<EventFormProps> = ({isEditing}) => {
                     />
                 </div>
                 <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className='block text-sm font-medium text-gray-100'>
                         Description
                     </label>
                     <textarea
@@ -85,7 +85,7 @@ export const EventForm: React.FC<EventFormProps> = ({isEditing}) => {
                     />
                 </div>
                 <div>
-                    <label className='block text-sm font-medium text-gray-700'>
+                    <label className='block text-sm font-medium text-gray-100'>
                         Date
                     </label>
                     <input
