@@ -35,6 +35,9 @@ $ npm install
 ## Compile and run the project
 
 ```bash
+# seed events data
+$ npm run seed
+
 # development
 $ npm run start
 

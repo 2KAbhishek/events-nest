@@ -20,7 +20,7 @@
 <a href="https://github.com/2KAbhishek/events-nest/pulse">
 <img alt="Last Updated" src="https://img.shields.io/github/last-commit/2kabhishek/events-nest?style=flat&color=e06c75&label="> </a>
 
-<h3>Short Sweet Headline 🎇🎉</h3>
+<h3>Events app demo with Nest 🪺🗓️</h3>
 
 <figure>
   <img src="docs/images/screenshot.png" alt="events-nest in action">
@@ -30,71 +30,24 @@
 
 </div>
 
-events-nest is a `<utility/tool>` that allows `<target_audience>` to `<action>`.
-
-## ✨ Features
-
-- Comes with a ready to go README template
-- Works with [mkrepo](https://github.com/2kabhishek/mkrepo)
+events-nest is a demo app built with NestJS and React.
+It is a simple events app that allows users to do CRUD operations on events.
 
 ## ⚡ Setup
 
-### ⚙️ Requirements
-
-- foo >= bar
-- bazz
-
-### 💻 Installation
-
-Installing events-nest is as simple as cloning and symlinking!
-
-```bash
-git clone https://github.com/2kabhishek/events-nest
-cd events-nest
-<install_command>
-```
-
-## 🚀 Usage
-
-```bash
-USAGE:
-    events-nest [FLAGS] [OPTIONS]
-Example:
-    events-nest
-```
-
-## 🏗️ What's Next
-
-Planning to add `<feature/module>`.
-
-### ✅ To-Do
-
-- [x] Setup repo
-- [ ] Think real hard
-- [ ] Start typing
+Follow instructions in [events-backend](./events-backend/) and [events-frontend](./events-frontend/) to setup the repos.
 
 ## 🧑‍💻 Behind The Code
 
 ### 🌈 Inspiration
 
-events-nest was inspired by `<reason/idea>`.
-
-### 💡 Challenges/Learnings
-
-- The main challenges were `<issue/difficulty>`
-- I learned about `<learning/accomplishment>`
+Needed a simple app to demonstrate the power of NestJS and React.
 
 ### 🧰 Tooling
 
 - [dots2k](https://github.com/2kabhishek/dots2k) — Dev Environment
 - [nvim2k](https://github.com/2kabhishek/nvim2k) — Personalized Editor
-- [sway2k](https://github.com/2kabhishek/sway2k) — Desktop Environment
 - [qute2k](https://github.com/2kabhishek/qute2k) — Personalized Browser
-
-### 🔍 More Info
-
-- [shelly](https://github.com/2kabhishek/shelly) — Command line template
-- [tiny-web](https://github.com/2kabhishek/tiny-web) — Web app template
 
 <hr>
 
