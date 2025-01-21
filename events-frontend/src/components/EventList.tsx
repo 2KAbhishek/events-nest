@@ -30,51 +30,60 @@ export const EventList: React.FC = () => {
     };
 
     return (
-        <div className='space-y-4'>
-            <div className='flex justify-between items-center'>
+        <div className='max-w-4xl mx-auto'>
+            <div className='flex justify-between items-center mb-6'>
                 <h2 className='text-2xl font-bold'>Events</h2>
                 <Link
                     to='/events/new'
-                    className='bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700'
+                    className='bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors'
                 >
                     New Event
                 </Link>
             </div>
-            <div className='grid gap-4'>
-                {events.map((event) => (
-                    <div
-                        key={event.id}
-                        className='border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow'
-                    >
-                        <div className='flex justify-between items-start'>
-                            <div>
-                                <h3 className='text-lg font-semibold'>
-                                    {event.title}
-                                </h3>
-                                <p className='text-gray-600'>
-                                    {event.description}
-                                </p>
-                                <p className='text-sm text-gray-500'>
-                                    {format(new Date(event.date), 'PPP')}
-                                </p>
-                            </div>
-                            <div className='space-x-2'>
-                                <Link
-                                    to={`/events/${event.id}/edit`}
-                                    className='text-indigo-600 hover:text-indigo-800'
-                                >
-                                    Edit
-                                </Link>
-                                <button
-                                    onClick={() => handleDelete(event.id)}
-                                    className='text-red-600 hover:text-red-800'
-                                >
-                                    Delete
-                                </button>
+            <div className='space-y-4'>
+                {events.length === 0 ? (
+                    <p className='text-center text-gray-500 py-8'>
+                        No events found. Create one!
+                    </p>
+                ) : (
+                    events.map((event) => (
+                        <div
+                            key={event.id}
+                            className='border rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow bg-white'
+                        >
+                            <div className='flex justify-between items-start'>
+                                <div className='space-y-2'>
+                                    <h3 className='text-lg font-semibold'>
+                                        {event.title}
+                                    </h3>
+                                    <p className='text-gray-600'>
+                                        {event.description}
+                                    </p>
+                                    <p className='text-sm text-gray-500'>
+                                        {format(new Date(event.date), 'PPP')}
+                                    </p>
+                                </div>
+                                <div className='space-x-4'>
+                                    <Link
+                                        to={`/events/${event.id}/edit`}
+                                        className='text-indigo-600 hover:text-indigo-800'
+                                    >
+                                        <button className='bg-gray-300'>
+                                            Edit
+                                        </button>
+                                    </Link>
+
+                                    <button
+                                        onClick={() => handleDelete(event.id)}
+                                        className='bg-gray-300 text-red-600 hover:text-red-800'
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
         </div>
     );

@@ -1,29 +1,44 @@
-import React, {useState, FormEvent} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {Event} from '../types/event';
-import {createEvent, updateEvent} from '../api/events';
+import React, {useState, FormEvent, useEffect} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import {createEvent, updateEvent, getEvent} from '../api/events';
 
 interface EventFormProps {
-    initialEvent?: Event;
     isEditing?: boolean;
 }
 
-export const EventForm: React.FC<EventFormProps> = ({
-    initialEvent,
-    isEditing
-}) => {
+export const EventForm: React.FC<EventFormProps> = ({isEditing}) => {
     const navigate = useNavigate();
+    const {id} = useParams();
     const [formData, setFormData] = useState({
-        title: initialEvent?.title || '',
-        description: initialEvent?.description || '',
-        date: initialEvent?.date || ''
+        title: '',
+        description: '',
+        date: ''
     });
+
+    useEffect(() => {
+        if (isEditing && id) {
+            const fetchEvent = async () => {
+                try {
+                    const eventData = await getEvent(parseInt(id));
+                    setFormData({
+                        title: eventData.title,
+                        description: eventData.description,
+                        date: eventData.date
+                    });
+                } catch (error) {
+                    console.error('Error fetching event:', error);
+                    navigate('/');
+                }
+            };
+            fetchEvent();
+        }
+    }, [id, isEditing, navigate]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-            if (isEditing && initialEvent) {
-                await updateEvent(initialEvent.id, formData);
+            if (isEditing && id) {
+                await updateEvent(parseInt(id), formData);
             } else {
                 await createEvent(formData);
             }
@@ -34,54 +49,72 @@ export const EventForm: React.FC<EventFormProps> = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} className='space-y-4'>
-            <div>
-                <label className='block text-sm font-medium text-gray-700'>
-                    Title
-                </label>
-                <input
-                    type='text'
-                    value={formData.title}
-                    onChange={(e) =>
-                        setFormData({...formData, title: e.target.value})
-                    }
-                    className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'
-                    required
-                />
-            </div>
-            <div>
-                <label className='block text-sm font-medium text-gray-700'>
-                    Description
-                </label>
-                <textarea
-                    value={formData.description}
-                    onChange={(e) =>
-                        setFormData({...formData, description: e.target.value})
-                    }
-                    className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'
-                    required
-                />
-            </div>
-            <div>
-                <label className='block text-sm font-medium text-gray-700'>
-                    Date
-                </label>
-                <input
-                    type='date'
-                    value={formData.date}
-                    onChange={(e) =>
-                        setFormData({...formData, date: e.target.value})
-                    }
-                    className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'
-                    required
-                />
-            </div>
-            <button
-                type='submit'
-                className='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            >
-                {isEditing ? 'Update Event' : 'Create Event'}
-            </button>
-        </form>
+        <div className='max-w-2xl m-8'>
+            <h2 className='text-2xl font-bold mb-6'>
+                {isEditing ? 'Edit Event' : 'Create New Event'}
+            </h2>
+            <form onSubmit={handleSubmit} className='space-y-6'>
+                <div>
+                    <label className='block text-sm font-medium text-gray-700'>
+                        Title
+                    </label>
+                    <input
+                        type='text'
+                        value={formData.title}
+                        onChange={(e) =>
+                            setFormData({...formData, title: e.target.value})
+                        }
+                        className='mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2 px-3 focus:border-indigo-500 focus:ring-indigo-500'
+                        required
+                    />
+                </div>
+                <div>
+                    <label className='block text-sm font-medium text-gray-700'>
+                        Description
+                    </label>
+                    <textarea
+                        value={formData.description}
+                        onChange={(e) =>
+                            setFormData({
+                                ...formData,
+                                description: e.target.value
+                            })
+                        }
+                        className='mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2 px-3 focus:border-indigo-500 focus:ring-indigo-500'
+                        rows={4}
+                        required
+                    />
+                </div>
+                <div>
+                    <label className='block text-sm font-medium text-gray-700'>
+                        Date
+                    </label>
+                    <input
+                        type='date'
+                        value={formData.date}
+                        onChange={(e) =>
+                            setFormData({...formData, date: e.target.value})
+                        }
+                        className='mt-1 block w-full rounded-md border border-gray-300 shadow-sm py-2 px-3 focus:border-indigo-500 focus:ring-indigo-500'
+                        required
+                    />
+                </div>
+                <div className='flex gap-4'>
+                    <button
+                        type='submit'
+                        className='flex-1 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    >
+                        {isEditing ? 'Update' : 'Create'}
+                    </button>
+                    <button
+                        type='button'
+                        onClick={() => navigate('/')}
+                        className='flex-1 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
     );
 };
