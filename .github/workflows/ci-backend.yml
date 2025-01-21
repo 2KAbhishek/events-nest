@@ -1,6 +1,6 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-name: CI
+name: CI (Backend)
 
 on:
   push:
@@ -25,9 +25,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: events-backend/package-lock.json
 
-      - run: cd events-backend
       - run: npm ci
+        working-directory: events-backend
       - run: npm run build --if-present
+        working-directory: events-backend
       - run: npm run lint
+        working-directory: events-backend
       - run: npm run test
+        working-directory: events-backend
       - run: npm run test:e2e
+        working-directory: events-backend
